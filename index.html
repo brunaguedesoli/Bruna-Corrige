@@ -117,7 +117,7 @@
       border-left: 4px solid #ffc107;
       padding: 15px;
       border-radius: 8px;
-      margin: 20px 0;
+      margin: 10px 0 20px 0;
       color: #664d03;
     }
 
@@ -160,7 +160,7 @@
 
       <div class="calculator-section">
         <div class="input-group">
-          <label for="wordCount">Quantas palavras tem sua essay?</label>
+          <label for="wordCount">Quantas palavras tem sua(s) essay(s)?</label>
           <input type="number" id="wordCount" placeholder="Ex: 250" min="1" />
         </div>
 
@@ -184,30 +184,16 @@
         <strong>Valor:</strong> <span id="formPrice">R$ 0,00</span>
       </div>
 
-     <div class="warning-info">
-  <strong>Importante:</strong><br />
-  Faça upload do comprovante (PDF ou PNG) no Google Drive, libere o acesso
-  (qualquer pessoa com o link), com permissão <strong>Editor</strong> e cole o link abaixo.
-</div>
+      <form
+        id="submissionForm"
+        action="https://formspree.io/f/xjknldok"
+        method="POST"
+      >
+        <div class="input-group">
+          <label for="name_input">Nome completo *</label>
+          <input type="text" id="name_input" name="name" required />
+        </div>
 
-<div class="input-group">
-  <label for="comprovanteDrive">
-    Link do comprovante de pagamento no Google Drive *
-  </label>
-
-  <input
-    type="url"
-    id="comprovanteDrive"
-    name="comprovante_drive"
-    placeholder="https://drive.google.com/..."
-    required
-  />
-
-  <span class="small-hint">
-    Inclua o prompt da essay e o nome da universidade.
-  </span>
-</div>
-      
         <div class="input-group">
           <label for="phone">WhatsApp *</label>
           <input type="tel" id="phone" name="whatsapp" placeholder="(00) 00000-0000" required />
@@ -219,12 +205,30 @@
         </div>
 
         <div class="input-group">
-          <label for="docsLink">Link da essay no Google Docs (acesso para edição) *</label>
-          <input type="text" id="docsLink" name="link_docs" placeholder="https://docs.google.com/..." required />
+          <label for="docsLink">Link da essay no Google Docs *</label>
+          <input
+            type="text"
+            id="docsLink"
+            name="link_docs"
+            placeholder="https://docs.google.com/..."
+            required
+          />
+          <span class="small-hint">
+            Inclua o prompt da essay e o nome da universidade no documento.
+          </span>
+        </div>
+
+        <!-- IMPORTANTE: fica aqui (entre Google Docs e comprovante) -->
+        <div class="warning-info">
+          <strong>Importante:</strong><br />
+          Faça upload do comprovante (PDF ou PNG) no Google Drive, libere o acesso
+          (qualquer pessoa com o link), com permissão <strong>Editor</strong> e cole o link abaixo.
         </div>
 
         <div class="input-group">
-          <label for="comprovanteDrive">Link do comprovante no Google Drive *</label>
+          <label for="comprovanteDrive">
+            Link do comprovante de pagamento no Google Drive (acesso para leitor) *
+          </label>
           <input
             type="url"
             id="comprovanteDrive"
@@ -232,9 +236,6 @@
             placeholder="https://drive.google.com/..."
             required
           />
-          <span class="small-hint">
-            Dica: no Drive → Compartilhar → “Qualquer pessoa com o link” → Leitor.
-          </span>
         </div>
 
         <input type="hidden" name="valor" id="valor_hidden" />
@@ -323,7 +324,6 @@
         return;
       }
 
-      // Hidden fields
       document.getElementById('valor_hidden').value =
         'R$ ' + currentPrice.toFixed(2).replace('.', ',');
       document.getElementById('palavras_hidden').value = wordCountEl.value;
@@ -364,4 +364,5 @@
   </script>
 </body>
 </html>
+
 
