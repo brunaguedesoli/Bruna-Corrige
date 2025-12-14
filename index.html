@@ -184,21 +184,30 @@
         <strong>Valor:</strong> <span id="formPrice">R$ 0,00</span>
       </div>
 
-      <div class="warning-info">
-        <strong>📎 Importante:</strong><br />
-        Faça upload do comprovante (PDF ou PNG) no Google Drive, libere o acesso (qualquer pessoa com o link) e cole o link abaixo.
-      </div>
+     <div class="warning-info">
+  <strong>Importante:</strong><br />
+  Faça upload do comprovante (PDF ou PNG) no Google Drive, libere o acesso
+  (qualquer pessoa com o link), com permissão <strong>Editor</strong> e cole o link abaixo.
+</div>
 
-      <form
-        id="submissionForm"
-        action="https://formspree.io/f/xjknldok"
-        method="POST"
-      >
-        <div class="input-group">
-          <label for="name_input">Nome completo *</label>
-          <input type="text" id="name_input" name="name" required />
-        </div>
+<div class="input-group">
+  <label for="comprovanteDrive">
+    Link do comprovante de pagamento no Google Drive *
+  </label>
 
+  <input
+    type="url"
+    id="comprovanteDrive"
+    name="comprovante_drive"
+    placeholder="https://drive.google.com/..."
+    required
+  />
+
+  <span class="small-hint">
+    Inclua o prompt da essay e o nome da universidade.
+  </span>
+</div>
+      
         <div class="input-group">
           <label for="phone">WhatsApp *</label>
           <input type="tel" id="phone" name="whatsapp" placeholder="(00) 00000-0000" required />
