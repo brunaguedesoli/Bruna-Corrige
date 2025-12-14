@@ -1,12 +1,358 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teste Bruna</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Correção de Essay Profissional</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #E8E9EA;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      color: #2a506f;
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 2em;
+    }
+
+    .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 1.1em; }
+    .delivery-time { text-align: center; color: #888; font-size: 0.85em; margin-bottom: 5px; }
+
+    .calculator-section {
+      background: #f8f9ff;
+      padding: 30px;
+      border-radius: 15px;
+      margin-bottom: 30px;
+    }
+
+    .input-group { margin-bottom: 20px; }
+
+    label {
+      display: block;
+      color: #333;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input[type="number"],
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="url"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #2a506f;
+    }
+
+    .result {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      margin-top: 20px;
+      border: 3px solid #2a506f;
+    }
+
+    .result-label { color: #666; font-size: 0.9em; margin-bottom: 5px; }
+    .result-value { color: #2a506f; font-size: 2em; font-weight: bold; }
+
+    .cta-button {
+      width: 100%;
+      padding: 18px;
+      background: #2a506f;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.2em;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 25px rgba(42, 80, 111, 0.25);
+    }
+
+    .hidden { display: none; }
+    .back-button { background: #6c757d; margin-bottom: 20px; padding: 12px; font-size: 1em; }
+
+    .pix-info {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      border-left: 4px solid #2a506f;
+    }
+
+    .pix-info strong { color: #2a506f; }
+
+    .warning-info {
+      background: #fff3cd;
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      border-radius: 8px;
+      margin: 20px 0;
+      color: #664d03;
+    }
+
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border: 2px solid #c3e6cb;
+    }
+
+    .small-hint {
+      display: block;
+      margin-top: 8px;
+      color: #666;
+      font-size: 0.9em;
+      line-height: 1.3;
+    }
+
+    .error-message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      background: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Site funcionando 🎉</h1>
-  <p>Se você está vendo isso, o GitHub Pages está OK.</p>
+  <div class="container">
+
+    <!-- Página Principal -->
+    <div id="mainPage">
+      <h1>Correção de Essay de Application</h1>
+      <p class="delivery-time">Em até 2 dias</p>
+      <p class="subtitle">Por Bruna Guedes</p>
+
+      <div class="calculator-section">
+        <div class="input-group">
+          <label for="wordCount">Quantas palavras tem sua essay?</label>
+          <input type="number" id="wordCount" placeholder="Ex: 250" min="1" />
+        </div>
+
+        <div class="result">
+          <div class="result-label">Valor total:</div>
+          <div class="result-value" id="totalPrice">R$ 0,00</div>
+        </div>
+      </div>
+
+      <button class="cta-button" id="scheduleButton">Quero agendar minha revisão</button>
+    </div>
+
+    <!-- Página do Formulário -->
+    <div id="formPage" class="hidden">
+      <button class="cta-button back-button" id="backButton">← Voltar</button>
+
+      <h1>Formulário de Revisão</h1>
+
+      <div class="pix-info">
+        <strong>Chave Pix:</strong> thisisbrunag@gmail.com<br />
+        <strong>Valor:</strong> <span id="formPrice">R$ 0,00</span>
+      </div>
+
+      <div class="warning-info">
+        <strong>📎 Importante:</strong><br />
+        Faça upload do comprovante (PDF ou PNG) no Google Drive, libere o acesso (qualquer pessoa com o link) e cole o link abaixo.
+      </div>
+
+      <form
+        id="submissionForm"
+        action="https://formspree.io/f/xjknldok"
+        method="POST"
+      >
+        <div class="input-group">
+          <label for="name_input">Nome completo *</label>
+          <input type="text" id="name_input" name="name" required />
+        </div>
+
+        <div class="input-group">
+          <label for="phone">WhatsApp *</label>
+          <input type="tel" id="phone" name="whatsapp" placeholder="(00) 00000-0000" required />
+        </div>
+
+        <div class="input-group">
+          <label for="email_input">E-mail *</label>
+          <input type="email" id="email_input" name="email" required />
+        </div>
+
+        <div class="input-group">
+          <label for="docsLink">Link da essay no Google Docs (acesso para edição) *</label>
+          <input type="text" id="docsLink" name="link_docs" placeholder="https://docs.google.com/..." required />
+        </div>
+
+        <div class="input-group">
+          <label for="comprovanteDrive">Link do comprovante no Google Drive *</label>
+          <input
+            type="url"
+            id="comprovanteDrive"
+            name="comprovante_drive"
+            placeholder="https://drive.google.com/..."
+            required
+          />
+          <span class="small-hint">
+            Dica: no Drive → Compartilhar → “Qualquer pessoa com o link” → Leitor.
+          </span>
+        </div>
+
+        <input type="hidden" name="valor" id="valor_hidden" />
+        <input type="hidden" name="palavras" id="palavras_hidden" />
+
+        <button type="button" class="cta-button" id="submitBtn">Enviar Solicitação</button>
+        <div id="errorBox" class="error-message hidden"></div>
+      </form>
+    </div>
+
+    <!-- Página de Sucesso -->
+    <div id="successPage" class="hidden">
+      <div class="success-message">
+        <h2>✅ Solicitação Enviada com Sucesso!</h2>
+        <p style="margin-top: 15px;">Você receberá em breve um retorno no seu e-mail.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentPrice = 0;
+    const pricePerWord = 0.40;
+
+    const wordCountEl = document.getElementById('wordCount');
+    const totalPriceEl = document.getElementById('totalPrice');
+
+    const mainPage = document.getElementById('mainPage');
+    const formPage = document.getElementById('formPage');
+    const successPage = document.getElementById('successPage');
+
+    const scheduleButton = document.getElementById('scheduleButton');
+    const backButton = document.getElementById('backButton');
+
+    const submissionForm = document.getElementById('submissionForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    const errorBox = document.getElementById('errorBox');
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.classList.remove('hidden');
+    }
+
+    function hideError() {
+      errorBox.textContent = '';
+      errorBox.classList.add('hidden');
+    }
+
+    wordCountEl.addEventListener('input', function(e) {
+      const words = parseInt(e.target.value) || 0;
+      currentPrice = words * pricePerWord;
+      totalPriceEl.textContent = 'R$ ' + currentPrice.toFixed(2).replace('.', ',');
+    });
+
+    scheduleButton.addEventListener('click', function() {
+      if (!currentPrice) {
+        alert('Por favor, calcule o valor primeiro!');
+        return;
+      }
+
+      mainPage.classList.add('hidden');
+      formPage.classList.remove('hidden');
+      document.getElementById('formPrice').textContent =
+        'R$ ' + currentPrice.toFixed(2).replace('.', ',');
+    });
+
+    backButton.addEventListener('click', function() {
+      formPage.classList.add('hidden');
+      mainPage.classList.remove('hidden');
+      hideError();
+    });
+
+    submitBtn.addEventListener('click', async function(e) {
+      e.preventDefault();
+      hideError();
+
+      const name = document.getElementById('name_input').value.trim();
+      const whatsapp = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email_input').value.trim();
+      const linkDocs = document.getElementById('docsLink').value.trim();
+      const linkComprovante = document.getElementById('comprovanteDrive').value.trim();
+
+      if (!name || !whatsapp || !email || !linkDocs || !linkComprovante) {
+        alert('Por favor, preencha todos os campos obrigatórios!');
+        return;
+      }
+
+      // Hidden fields
+      document.getElementById('valor_hidden').value =
+        'R$ ' + currentPrice.toFixed(2).replace('.', ',');
+      document.getElementById('palavras_hidden').value = wordCountEl.value;
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      try {
+        const formData = new FormData(submissionForm);
+
+        const res = await fetch(submissionForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          formPage.classList.add('hidden');
+          successPage.classList.remove('hidden');
+          submissionForm.reset();
+        } else {
+          let data = null;
+          try { data = await res.json(); } catch {}
+          const msg =
+            (data && data.errors && data.errors[0] && data.errors[0].message)
+              ? data.errors[0].message
+              : 'Erro ao enviar. Tente novamente.';
+          showError(msg);
+        }
+      } catch (err) {
+        console.error(err);
+        showError('Falha de conexão ao enviar. Tente novamente.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar Solicitação';
+      }
+    });
+  </script>
 </body>
 </html>
+
